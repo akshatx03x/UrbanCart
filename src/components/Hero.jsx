@@ -3,7 +3,7 @@ import { assets } from '../assets/frontend_assets/assets'
 
 const Hero = () => {
   return (
-    <div className="flex flex-col sm:flex-row border border-gray-200">
+    <div className="flex flex-col rounded-2xl shadow-2xl sm:flex-row border border-gray-200">
   {/* Hero Left Side */}
   <div className="w-full sm:w-1/2 flex items-center justify-center py-10 sm:py-0 bg-white">
     <div className="text-[#414141] space-y-5 px-6 sm:px-12">
@@ -28,7 +28,7 @@ const Hero = () => {
 
   {/* Hero Right Side */}
   <div className="w-full sm:w-1/2 bg-[#fcdcdc] flex items-center justify-center">
-    <img src={assets.hero_img} className="w-full h-full object-cover" alt="Hero" />
+    <img src={assets.xyz} className="w-full h-full object-cover" alt="Hero" />
   </div>
 </div>
 
