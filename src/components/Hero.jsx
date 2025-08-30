@@ -20,8 +20,8 @@ const Hero = () => {
 
       {/* Bottom Line */}
       <div className="flex items-center gap-2 ">
-        <p className="font-semibold text-sm md:text-base tracking-wide">SHOP NOW</p>
-        <p className="w-8 md:w-11 h-[1px] bg-[#414141]"></p>
+        <p  className="font-semibold text-sm border border-gray-400 rounded-3xl p-2 md:text-base tracking-wide">SHOP NOW</p>
+        <p className="w-8 md:w-11 h-[1px] py-0 bg-[#414141]"></p>
       </div>
     </div>
   </div>
