@@ -172,8 +172,14 @@ export async function storefrontApiRequest(query: string, variables: any = {}) {
 }
 
 export async function fetchProducts(limit = 20): Promise<ShopifyProduct[]> {
-  const data = await storefrontApiRequest(STOREFRONT_QUERY, { first: limit });
-  return data?.data?.products?.edges || [];
+  try {
+    const data = await storefrontApiRequest(STOREFRONT_QUERY, { first: limit });
+    return data?.data?.products?.edges || [];
+  } catch (error) {
+    // Return dummy data when Shopify API is unavailable
+    console.warn('Shopify API unavailable, using dummy data:', error);
+    return getDummyProducts().slice(0, limit);
+  }
 }
 
 export async function createStorefrontCheckout(items: CartItem[]): Promise<string> {
@@ -194,7 +200,7 @@ export async function createStorefrontCheckout(items: CartItem[]): Promise<strin
     }
 
     const cart = cartData.data.cartCreate.cart;
-    
+
     if (!cart.checkoutUrl) {
       throw new Error('No checkout URL returned from Shopify');
     }
@@ -206,4 +212,351 @@ export async function createStorefrontCheckout(items: CartItem[]): Promise<strin
     console.error('Error creating storefront checkout:', error);
     throw error;
   }
+}
+
+function getDummyProducts(): ShopifyProduct[] {
+  return [
+    {
+      node: {
+        id: "dummy-1",
+        title: "Premium Coffee Beans",
+        description: "Rich, aromatic coffee beans sourced from the finest plantations. Perfect for your morning brew.",
+        handle: "premium-coffee-beans",
+        productType: "Food",
+        priceRange: {
+          minVariantPrice: {
+            amount: "24.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/src/assets/products/coffee-beans.jpg",
+              altText: "Premium Coffee Beans"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-1",
+              title: "Default Title",
+              price: {
+                amount: "24.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-2",
+        title: "Cotton T-Shirt",
+        description: "Comfortable 100% cotton t-shirt with a classic fit. Available in multiple colors.",
+        handle: "cotton-t-shirt",
+        productType: "Clothing",
+        priceRange: {
+          minVariantPrice: {
+            amount: "19.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/src/assets/products/cotton-tshirt.jpg",
+              altText: "Cotton T-Shirt"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-2",
+              title: "Default Title",
+              price: {
+                amount: "19.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-3",
+        title: "Designer Hoodie",
+        description: "Premium designer hoodie with unique patterns. Made from high-quality materials.",
+        handle: "designer-hoodie",
+        productType: "Clothing",
+        priceRange: {
+          minVariantPrice: {
+            amount: "89.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/src/assets/products/designer-hoodie.jpg",
+              altText: "Designer Hoodie"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-3",
+              title: "Default Title",
+              price: {
+                amount: "89.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-4",
+        title: "Grain Bread",
+        description: "Freshly baked whole grain bread made with organic ingredients. Perfect for healthy meals.",
+        handle: "grain-bread",
+        productType: "Food",
+        priceRange: {
+          minVariantPrice: {
+            amount: "5.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/src/assets/products/grain-bread.jpg",
+              altText: "Grain Bread"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-4",
+              title: "Default Title",
+              price: {
+                amount: "5.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-5",
+        title: "iPhone 15 Pro",
+        description: "Latest iPhone 15 Pro with advanced features and stunning camera capabilities.",
+        handle: "iphone-15-pro",
+        productType: "Mobile",
+        priceRange: {
+          minVariantPrice: {
+            amount: "999.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/src/assets/products/iphone-15-pro.jpg",
+              altText: "iPhone 15 Pro"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-5",
+              title: "Default Title",
+              price: {
+                amount: "999.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-6",
+        title: "Organic Bananas",
+        description: "Fresh organic bananas packed with nutrients. Perfect for smoothies and snacks.",
+        handle: "organic-bananas",
+        productType: "Food",
+        priceRange: {
+          minVariantPrice: {
+            amount: "3.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/src/assets/products/organic-bananas.jpg",
+              altText: "Organic Bananas"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-6",
+              title: "Default Title",
+              price: {
+                amount: "3.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-7",
+        title: "Samsung S24",
+        description: "Samsung Galaxy S24 with cutting-edge technology and exceptional performance.",
+        handle: "samsung-s24",
+        productType: "Mobile",
+        priceRange: {
+          minVariantPrice: {
+            amount: "799.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/src/assets/products/samsung-s24.jpg",
+              altText: "Samsung S24"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-7",
+              title: "Default Title",
+              price: {
+                amount: "799.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-8",
+        title: "Slim Jeans",
+        description: "Modern slim-fit jeans made from premium denim. Comfortable and stylish.",
+        handle: "slim-jeans",
+        productType: "Clothing",
+        priceRange: {
+          minVariantPrice: {
+            amount: "79.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/src/assets/products/slim-jeans.jpg",
+              altText: "Slim Jeans"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-8",
+              title: "Default Title",
+              price: {
+                amount: "79.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-9",
+        title: "Wireless Headphones",
+        description: "High-quality wireless headphones with noise cancellation and premium sound.",
+        handle: "wireless-headphones",
+        productType: "Electronics",
+        priceRange: {
+          minVariantPrice: {
+            amount: "199.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/src/assets/products/wireless-headphones.jpg",
+              altText: "Wireless Headphones"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-9",
+              title: "Default Title",
+              price: {
+                amount: "199.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    }
+  ];
 }
