@@ -186,7 +186,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-24 relative z-10">
+      <section className="py- relative z-10">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-12">
             <div className="animate-slide-up">
@@ -292,37 +292,42 @@ export default function Home() {
       </section>
 
       {/* Trust Section */}
-      <section className="py-20 relative z-10">
-        <div className="container mx-auto px-4">
-          <div className="glass-card rounded-3xl p-12 md:p-16 text-center relative overflow-hidden">
-            <div className="shimmer absolute inset-0" />
-            <div className="relative z-10">
-              <h3 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
-                Join 10,000+ Happy Customers
-              </h3>
-              <p className="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
-                Experience premium quality, exceptional service, and products that exceed expectations.
-              </p>
-              <div className="flex gap-4 justify-center">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400 mb-1">99%</div>
-                  <div className="text-sm text-slate-500">Satisfaction</div>
-                </div>
-                <div className="w-px bg-white/10" />
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-pink-400 mb-1">24/7</div>
-                  <div className="text-sm text-slate-500">Support</div>
-                </div>
-                <div className="w-px bg-white/10" />
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-400 mb-1">Fast</div>
-                  <div className="text-sm text-slate-500">Shipping</div>
-                </div>
-              </div>
-            </div>
+      <section id="about" className=" relative z-10">
+  <div className="container mx-auto px-4 m-10">
+    <div className="glass-card rounded-3xl p-12 md:p-16 text-center relative overflow-hidden">
+      <div className="shimmer absolute inset-0" />
+      <div className="relative z-10">
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-white to-purple-300 bg-clip-text text-transparent">
+          Our Story & Commitment
+        </h2>
+        <p className="text-slate-300 text-xl mb-10 max-w-3xl mx-auto">
+          From a simple idea to serving over 10,000 satisfied customers, our mission is to redefine quality and customer experience in our industry.
+        </p>
+
+        {/* Core Stats Block */}
+        <div className="flex flex-wrap gap-8  justify-center">
+          <div className="text-center p-4">
+            <div className="text-5xl font-bold text-purple-400 mb-1">10k+</div>
+            <div className="text-sm text-slate-500 uppercase tracking-widest">Happy Customers</div>
+          </div>
+          <div className="hidden md:block w-px bg-white/10" />
+          <div className="text-center p-4">
+            <div className="text-5xl font-bold text-pink-400 mb-1">99%</div>
+            <div className="text-sm text-slate-500 uppercase tracking-widest">Satisfaction Rate</div>
+          </div>
+          <div className="hidden md:block w-px bg-white/10" />
+          <div className="text-center p-4">
+            <div className="text-5xl font-bold text-purple-400 mb-1">24/7</div>
+            <div className="text-sm text-slate-500 uppercase tracking-widest">Premium Support</div>
           </div>
         </div>
-      </section>
+        {/* End Core Stats Block */}
+
+      </div>
+    </div>
+  </div>
+</section>
+
     </div>
   );
 }

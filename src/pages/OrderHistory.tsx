@@ -23,6 +23,7 @@ interface Order {
     products: {
       name: string;
       image_url: string;
+      images?: string[];
     };
   }[];
 }

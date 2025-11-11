@@ -24,8 +24,8 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 fixed inset-x-0 top-0 z-50">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-primary">
           <ShoppingBag className="h-8 w-8" />
           UrbanCart
@@ -37,6 +37,9 @@ export const Navbar = () => {
           </Link>
           <Link to="/shop" className="text-foreground hover:text-primary transition-colors">
             Shop
+          </Link>
+          <Link to="/#about" className="text-foreground hover:text-primary transition-colors">
+            About
           </Link>
         </div>
 

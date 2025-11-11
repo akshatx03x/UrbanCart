@@ -288,7 +288,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/coffee-beans.jpg",
+              url: "https://plus.unsplash.com/premium_photo-1675435644687-562e8042b9db?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmVlJTIwYmVhbnN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Premium Coffee Beans"
             }
           }]
@@ -326,7 +326,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/cotton-tshirt.jpg",
+              url: "https://plus.unsplash.com/premium_photo-1673125287084-e90996bad505?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGNvdHRvbiUyMHRzaGlydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Cotton T-Shirt"
             }
           }]
@@ -364,7 +364,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/designer-hoodie.jpg",
+              url: "https://plus.unsplash.com/premium_photo-1673125510222-1a51e3a8ccb0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8aG9vZGllfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600",
               altText: "Designer Hoodie"
             }
           }]
@@ -402,7 +402,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/grain-bread.jpg",
+              url: "https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8QnJlYWR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Grain Bread"
             }
           }]
@@ -440,7 +440,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/iphone-15-pro.jpg",
+              url: "https://images.unsplash.com/photo-1609692814858-f7cd2f0afa4f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGlwaG9uZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
               altText: "iPhone 15 Pro"
             }
           }]
@@ -478,7 +478,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/organic-bananas.jpg",
+              url: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFuYW5hc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Organic Bananas"
             }
           }]
@@ -516,7 +516,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/samsung-s24.jpg",
+              url: "https://images.unsplash.com/photo-1706469980834-36cc556c02c2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2Ftc3VuZyUyMHMyNHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Samsung S24"
             }
           }]
@@ -542,7 +542,7 @@ function getDummyProducts(): ShopifyProduct[] {
       node: {
         id: "dummy-8",
         title: "Slim Jeans",
-        description: "Modern slim-fit jeans made from premium denim. Comfortable and stylish.",
+        description: "Cotton Jeans made with high-quality fabric for a comfortable fit.",
         handle: "slim-jeans",
         productType: "Clothing",
         priceRange: {
@@ -554,7 +554,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/slim-jeans.jpg",
+              url: "https://images.unsplash.com/photo-1714729382668-7bc3bb261662?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fEplYW5zfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600",
               altText: "Slim Jeans"
             }
           }]
@@ -630,7 +630,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/coffee-beans.jpg",
+              url: "https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGphY2tldCUyMGxlYXRoZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Vintage Leather Jacket"
             }
           }]
@@ -668,7 +668,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/cotton-tshirt.jpg",
+              url: "https://images.unsplash.com/photo-1687259126959-83ebfc093a77?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8d2F0Y2glMjBzbWFydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Smart Watch Series 8"
             }
           }]
@@ -706,7 +706,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/designer-hoodie.jpg",
+              url: "https://images.unsplash.com/photo-1738484708927-c1f45df0b56e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlubmVyJTIwc2V0fGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600",
               altText: "Ceramic Dinner Set"
             }
           }]
@@ -744,7 +744,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/grain-bread.jpg",
+              url: "https://images.unsplash.com/photo-1624651208388-f8726eace8f2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHlvZ2ElMjBtYXR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Yoga Mat Premium"
             }
           }]
@@ -782,7 +782,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/iphone-15-pro.jpg",
+              url: "https://images.unsplash.com/photo-1507878566509-a0dbe19677a5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGJsdWV0b290aCUyMHNwZWFrZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Bluetooth Speaker"
             }
           }]
@@ -820,7 +820,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/organic-bananas.jpg",
+              url: "https://images.unsplash.com/photo-1701520839071-55bdfe64c5ed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z3JlZW4lMjB0ZWF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Organic Green Tea"
             }
           }]
@@ -858,7 +858,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/samsung-s24.jpg",
+              url: "https://images.unsplash.com/photo-1597892657493-6847b9640bac?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmluZyUyMHNob2VzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600",
               altText: "Running Shoes Pro"
             }
           }]
@@ -896,7 +896,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/slim-jeans.jpg",
+              url: "https://images.unsplash.com/photo-1570061851151-7adc1853e16e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbCUyMGFydCUyMGNhbnZhfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600",
               altText: "Wall Art Canvas"
             }
           }]
@@ -934,7 +934,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/wireless-headphones.jpg",
+              url: "https://images.unsplash.com/photo-1605274280925-9dd1baacb97b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHdhdGVyJTIwYm90dGxlJTIwc3RlZWx8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Stainless Steel Water Bottle"
             }
           }]
@@ -972,7 +972,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/coffee-beans.jpg",
+              url: "https://images.unsplash.com/photo-1616248304589-6a3d8d60ad7d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8a2V5Ym9yZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Gaming Mechanical Keyboard"
             }
           }]
@@ -1010,7 +1010,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/assets/products/cotton-tshirt.jpg",
+              url: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGVyZnVtZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600",
               altText: "Luxury Perfume"
             }
           }]

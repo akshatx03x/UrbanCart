@@ -1,9 +1,4 @@
-# TODO List for Admin Products Management
+# TODO: Make Navbar Fixed on Homepage
 
-## Current Task: Add Product Management Page in Admin
-- [x] Create AdminProducts.tsx page to display existing products
-- [x] Add route for /admin/products in App.tsx
-- [x] Update Admin.tsx to include navigation to products management page
-- [x] Implement delete functionality with confirmation dialog
-- [x] Ensure admin-only access to the page
-- [x] Test the functionality and UI
+- [ ] Update Navbar component to use fixed positioning instead of sticky
+- [ ] Add top padding to Home page content to prevent overlap with fixed navbar

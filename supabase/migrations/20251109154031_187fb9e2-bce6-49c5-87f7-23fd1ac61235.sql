@@ -156,8 +156,12 @@ CREATE POLICY "Admins can view all orders"
 ON public.orders FOR SELECT 
 USING (EXISTS (SELECT 1 FROM public.profiles WHERE user_id = auth.uid() AND is_admin = true));
 
-CREATE POLICY "Admins can update all orders" 
-ON public.orders FOR UPDATE 
+CREATE POLICY "Admins can update all orders"
+ON public.orders FOR UPDATE
+USING (EXISTS (SELECT 1 FROM public.profiles WHERE user_id = auth.uid() AND is_admin = true));
+
+CREATE POLICY "Admins can delete all orders"
+ON public.orders FOR DELETE
 USING (EXISTS (SELECT 1 FROM public.profiles WHERE user_id = auth.uid() AND is_admin = true));
 
 -- Order items policies
@@ -169,8 +173,12 @@ CREATE POLICY "Users can create their own order items"
 ON public.order_items FOR INSERT 
 WITH CHECK (EXISTS (SELECT 1 FROM public.orders WHERE id = order_id AND user_id = auth.uid()));
 
-CREATE POLICY "Admins can view all order items" 
-ON public.order_items FOR SELECT 
+CREATE POLICY "Admins can view all order items"
+ON public.order_items FOR SELECT
+USING (EXISTS (SELECT 1 FROM public.profiles WHERE user_id = auth.uid() AND is_admin = true));
+
+CREATE POLICY "Admins can delete all order items"
+ON public.order_items FOR DELETE
 USING (EXISTS (SELECT 1 FROM public.profiles WHERE user_id = auth.uid() AND is_admin = true));
 
 -- Create trigger for updating products timestamp

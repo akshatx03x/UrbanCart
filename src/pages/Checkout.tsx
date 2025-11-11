@@ -33,7 +33,7 @@ export default function Checkout() {
     postal_code: '',
   });
 
-  const subtotal = items.filter(item => item.product.node.id.startsWith('supabase-')).reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
+  const subtotal = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
   const discountAmount = (subtotal * discount) / 100;
   const total = subtotal - discountAmount;
 
