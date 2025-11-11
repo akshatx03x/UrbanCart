@@ -28,7 +28,7 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold text-primary">
           <ShoppingBag className="h-8 w-8" />
-          ShopHub
+          UrbanCart
         </Link>
 
         <div className="hidden md:flex items-center gap-6">
@@ -41,7 +41,7 @@ export const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <ThemeToggle />
+         <div className="hidden"><ThemeToggle /></div> 
           
           <Button variant="ghost" size="icon" className="relative" onClick={() => navigate("/wishlist")}>
             <Heart className="h-5 w-5" />

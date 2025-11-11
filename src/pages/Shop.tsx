@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Navbar } from "@/components/Navbar";
-import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
+import { fetchProducts, fetchSupabaseProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { useWishlistStore } from "@/stores/wishlistStore";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -47,8 +47,12 @@ export default function Shop() {
 
   const loadProducts = async () => {
     try {
-      const data = await fetchProducts(50);
-      setProducts(data);
+      const [shopifyProducts, supabaseProducts] = await Promise.all([
+        fetchProducts(50),
+        fetchSupabaseProducts()
+      ]);
+      const combinedProducts = [...shopifyProducts, ...supabaseProducts];
+      setProducts(combinedProducts);
     } catch (error) {
       console.error('Error loading products:', error);
     } finally {
@@ -61,8 +65,15 @@ export default function Shop() {
 
     // Apply category filter
     if (filterCategory !== "all") {
-      filtered = filtered.filter(p => 
-        p.node.productType?.toLowerCase() === filterCategory.toLowerCase()
+      const categoryMapping: { [key: string]: string } = {
+        "Mobile": "Mobile",
+        "Clothes": "Clothing",
+        "Grocery": "Food"
+      };
+
+      const mappedCategory = categoryMapping[filterCategory] || filterCategory;
+      filtered = filtered.filter(p =>
+        p.node.productType?.toLowerCase() === mappedCategory.toLowerCase()
       );
     }
 
@@ -149,6 +160,33 @@ export default function Shop() {
           </div>
           
           <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex gap-2">
+              <Button
+                variant={filterCategory === "all" ? "default" : "outline"}
+                onClick={() => setFilterCategory("all")}
+              >
+                All
+              </Button>
+              <Button
+                variant={filterCategory === "Mobile" ? "default" : "outline"}
+                onClick={() => setFilterCategory("Mobile")}
+              >
+                Mobile
+              </Button>
+              <Button
+                variant={filterCategory === "Clothes" ? "default" : "outline"}
+                onClick={() => setFilterCategory("Clothes")}
+              >
+                Clothes
+              </Button>
+              <Button
+                variant={filterCategory === "Grocery" ? "default" : "outline"}
+                onClick={() => setFilterCategory("Grocery")}
+              >
+                Grocery
+              </Button>
+            </div>
+
             <Select value={sortBy} onValueChange={setSortBy}>
               <SelectTrigger className="w-[180px]">
                 <SlidersHorizontal className="h-4 w-4 mr-2" />

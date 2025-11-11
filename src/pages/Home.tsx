@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Navbar } from "@/components/Navbar";
-import { fetchProducts, ShopifyProduct } from "@/lib/shopify";
+import { fetchProducts, fetchSupabaseProducts, ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ShoppingCart, ArrowRight, Sparkles, Zap, Shield, TrendingUp } from "lucide-react";
@@ -29,8 +29,11 @@ export default function Home() {
 
   const loadProducts = async () => {
     try {
-      const data = await fetchProducts(20);
-      setProducts(data);
+      const [shopifyProducts, supabaseProducts] = await Promise.all([
+        fetchProducts(20),
+        fetchSupabaseProducts()
+      ]);
+      setProducts([...supabaseProducts, ...shopifyProducts]);
     } catch (error) {
       console.error('Error loading products:', error);
     } finally {

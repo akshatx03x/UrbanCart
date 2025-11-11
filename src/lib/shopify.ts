@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const SHOPIFY_API_VERSION = '2025-07';
 const SHOPIFY_STORE_PERMANENT_DOMAIN = 'shop-iverse-hub-0y5hs.myshopify.com';
@@ -48,6 +49,67 @@ export interface ShopifyProduct {
       values: string[];
     }>;
   };
+}
+
+export async function fetchSupabaseProducts(): Promise<ShopifyProduct[]> {
+  try {
+    const { data: products, error } = await supabase
+      .from('products')
+      .select(`
+        id,
+        name,
+        slug,
+        description,
+        price,
+        stock,
+        image_url
+      `)
+      .gt('stock', 0); // Only fetch products with stock > 0
+
+    if (error) throw error;
+
+    return products.map(product => ({
+      node: {
+        id: `supabase-${product.id}`,
+        title: product.name,
+        description: product.description || '',
+        handle: product.slug,
+        productType: 'General',
+        priceRange: {
+          minVariantPrice: {
+            amount: product.price.toString(),
+            currencyCode: 'USD'
+          }
+        },
+        images: {
+          edges: product.image_url ? [{
+            node: {
+              url: product.image_url,
+              altText: product.name
+            }
+          }] : []
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: `variant-supabase-${product.id}`,
+              title: 'Default Title',
+              price: {
+                amount: product.price.toString(),
+                currencyCode: 'USD'
+              },
+              availableForSale: product.stock > 0,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    }));
+  } catch (error) {
+    console.error('Error fetching Supabase products:', error);
+    return [];
+  }
 }
 
 export interface CartItem {
@@ -172,14 +234,8 @@ export async function storefrontApiRequest(query: string, variables: any = {}) {
 }
 
 export async function fetchProducts(limit = 20): Promise<ShopifyProduct[]> {
-  try {
-    const data = await storefrontApiRequest(STOREFRONT_QUERY, { first: limit });
-    return data?.data?.products?.edges || [];
-  } catch (error) {
-    // Return dummy data when Shopify API is unavailable
-    console.warn('Shopify API unavailable, using dummy data:', error);
-    return getDummyProducts().slice(0, limit);
-  }
+  // Return dummy products only, removing Shopify API dependency
+  return getDummyProducts().slice(0, limit);
 }
 
 export async function createStorefrontCheckout(items: CartItem[]): Promise<string> {
@@ -232,7 +288,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/src/assets/products/coffee-beans.jpg",
+              url: "/assets/products/coffee-beans.jpg",
               altText: "Premium Coffee Beans"
             }
           }]
@@ -270,7 +326,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/src/assets/products/cotton-tshirt.jpg",
+              url: "/assets/products/cotton-tshirt.jpg",
               altText: "Cotton T-Shirt"
             }
           }]
@@ -308,7 +364,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/src/assets/products/designer-hoodie.jpg",
+              url: "/assets/products/designer-hoodie.jpg",
               altText: "Designer Hoodie"
             }
           }]
@@ -346,7 +402,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/src/assets/products/grain-bread.jpg",
+              url: "/assets/products/grain-bread.jpg",
               altText: "Grain Bread"
             }
           }]
@@ -384,7 +440,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/src/assets/products/iphone-15-pro.jpg",
+              url: "/assets/products/iphone-15-pro.jpg",
               altText: "iPhone 15 Pro"
             }
           }]
@@ -422,7 +478,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/src/assets/products/organic-bananas.jpg",
+              url: "/assets/products/organic-bananas.jpg",
               altText: "Organic Bananas"
             }
           }]
@@ -460,7 +516,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/src/assets/products/samsung-s24.jpg",
+              url: "/assets/products/samsung-s24.jpg",
               altText: "Samsung S24"
             }
           }]
@@ -498,7 +554,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/src/assets/products/slim-jeans.jpg",
+              url: "/assets/products/slim-jeans.jpg",
               altText: "Slim Jeans"
             }
           }]
@@ -536,7 +592,7 @@ function getDummyProducts(): ShopifyProduct[] {
         images: {
           edges: [{
             node: {
-              url: "/src/assets/products/wireless-headphones.jpg",
+              url: "/assets/products/wireless-headphones.jpg",
               altText: "Wireless Headphones"
             }
           }]
@@ -548,6 +604,424 @@ function getDummyProducts(): ShopifyProduct[] {
               title: "Default Title",
               price: {
                 amount: "199.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-10",
+        title: "Vintage Leather Jacket",
+        description: "Classic vintage leather jacket with distressed finish. Timeless style and durability.",
+        handle: "vintage-leather-jacket",
+        productType: "Clothing",
+        priceRange: {
+          minVariantPrice: {
+            amount: "149.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/assets/products/coffee-beans.jpg",
+              altText: "Vintage Leather Jacket"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-10",
+              title: "Default Title",
+              price: {
+                amount: "149.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-11",
+        title: "Smart Watch Series 8",
+        description: "Advanced smartwatch with health monitoring, GPS, and long battery life.",
+        handle: "smart-watch-series-8",
+        productType: "Electronics",
+        priceRange: {
+          minVariantPrice: {
+            amount: "349.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/assets/products/cotton-tshirt.jpg",
+              altText: "Smart Watch Series 8"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-11",
+              title: "Default Title",
+              price: {
+                amount: "349.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-12",
+        title: "Ceramic Dinner Set",
+        description: "Elegant ceramic dinner set for 6 people. Microwave and dishwasher safe.",
+        handle: "ceramic-dinner-set",
+        productType: "Home",
+        priceRange: {
+          minVariantPrice: {
+            amount: "89.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/assets/products/designer-hoodie.jpg",
+              altText: "Ceramic Dinner Set"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-12",
+              title: "Default Title",
+              price: {
+                amount: "89.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-13",
+        title: "Yoga Mat Premium",
+        description: "Non-slip premium yoga mat with carrying strap. Perfect for all types of yoga practice.",
+        handle: "yoga-mat-premium",
+        productType: "Sports",
+        priceRange: {
+          minVariantPrice: {
+            amount: "39.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/assets/products/grain-bread.jpg",
+              altText: "Yoga Mat Premium"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-13",
+              title: "Default Title",
+              price: {
+                amount: "39.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-14",
+        title: "Bluetooth Speaker",
+        description: "Portable Bluetooth speaker with 360-degree sound and waterproof design.",
+        handle: "bluetooth-speaker",
+        productType: "Electronics",
+        priceRange: {
+          minVariantPrice: {
+            amount: "79.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/assets/products/iphone-15-pro.jpg",
+              altText: "Bluetooth Speaker"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-14",
+              title: "Default Title",
+              price: {
+                amount: "79.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-15",
+        title: "Organic Green Tea",
+        description: "Premium organic green tea leaves sourced from sustainable farms. Rich in antioxidants.",
+        handle: "organic-green-tea",
+        productType: "Food",
+        priceRange: {
+          minVariantPrice: {
+            amount: "12.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/assets/products/organic-bananas.jpg",
+              altText: "Organic Green Tea"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-15",
+              title: "Default Title",
+              price: {
+                amount: "12.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-16",
+        title: "Running Shoes Pro",
+        description: "Professional running shoes with advanced cushioning and breathable mesh upper.",
+        handle: "running-shoes-pro",
+        productType: "Sports",
+        priceRange: {
+          minVariantPrice: {
+            amount: "129.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/assets/products/samsung-s24.jpg",
+              altText: "Running Shoes Pro"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-16",
+              title: "Default Title",
+              price: {
+                amount: "129.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-17",
+        title: "Wall Art Canvas",
+        description: "Beautiful abstract wall art canvas print. Adds character to any room.",
+        handle: "wall-art-canvas",
+        productType: "Home",
+        priceRange: {
+          minVariantPrice: {
+            amount: "59.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/assets/products/slim-jeans.jpg",
+              altText: "Wall Art Canvas"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-17",
+              title: "Default Title",
+              price: {
+                amount: "59.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-18",
+        title: "Stainless Steel Water Bottle",
+        description: "Insulated stainless steel water bottle that keeps drinks cold for 24 hours.",
+        handle: "stainless-steel-water-bottle",
+        productType: "Sports",
+        priceRange: {
+          minVariantPrice: {
+            amount: "29.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/assets/products/wireless-headphones.jpg",
+              altText: "Stainless Steel Water Bottle"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-18",
+              title: "Default Title",
+              price: {
+                amount: "29.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-19",
+        title: "Gaming Mechanical Keyboard",
+        description: "RGB mechanical keyboard with blue switches. Perfect for gaming and typing.",
+        handle: "gaming-mechanical-keyboard",
+        productType: "Electronics",
+        priceRange: {
+          minVariantPrice: {
+            amount: "149.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/assets/products/coffee-beans.jpg",
+              altText: "Gaming Mechanical Keyboard"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-19",
+              title: "Default Title",
+              price: {
+                amount: "149.99",
+                currencyCode: "USD"
+              },
+              availableForSale: true,
+              selectedOptions: []
+            }
+          }]
+        },
+        options: []
+      }
+    },
+    {
+      node: {
+        id: "dummy-20",
+        title: "Luxury Perfume",
+        description: "Elegant luxury perfume with floral and woody notes. Long-lasting fragrance.",
+        handle: "luxury-perfume",
+        productType: "Beauty",
+        priceRange: {
+          minVariantPrice: {
+            amount: "89.99",
+            currencyCode: "USD"
+          }
+        },
+        images: {
+          edges: [{
+            node: {
+              url: "/assets/products/cotton-tshirt.jpg",
+              altText: "Luxury Perfume"
+            }
+          }]
+        },
+        variants: {
+          edges: [{
+            node: {
+              id: "variant-20",
+              title: "Default Title",
+              price: {
+                amount: "89.99",
                 currencyCode: "USD"
               },
               availableForSale: true,
