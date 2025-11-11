@@ -10,7 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2, Tag, X } from "lucide-react";
+import { ShoppingCart, Minus, Plus, Trash2, CreditCard, Loader2, Tag, X } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 
@@ -212,21 +212,21 @@ export const CartDrawer = () => {
                   </div>
                 </div>
                 
-                <Button 
+                <Button
                   onClick={handleCheckout}
-                  className="w-full" 
+                  className="w-full"
                   size="lg"
                   disabled={items.length === 0 || isLoading}
                 >
                   {isLoading ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Creating Checkout...
+                      Processing...
                     </>
                   ) : (
                     <>
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Checkout with Shopify
+                      <CreditCard className="w-4 h-4 mr-2" />
+                      Checkout with Stripe
                     </>
                   )}
                 </Button>

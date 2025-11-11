@@ -53,7 +53,7 @@ CREATE TABLE public.cart (
 -- Create orders table
 CREATE TABLE public.orders (
   id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID NOT NULL,
+  user_id UUID NOT NULL REFERENCES public.profiles(user_id) ON DELETE CASCADE,
   total_amount DECIMAL(10, 2) NOT NULL,
   status TEXT NOT NULL DEFAULT 'pending',
   shipping_address TEXT,

@@ -24,6 +24,7 @@ export default function Admin() {
     totalSales: 0,
     totalProfit: 0,
     totalOrders: 0,
+    totalProducts: 0,
     salesData: [] as { month: string; sales: number }[],
     profitData: [] as { month: string; profit: number }[],
   });
@@ -106,6 +107,7 @@ export default function Admin() {
       // Calculate total sales from completed orders
       const totalSales = orders?.reduce((sum, order) => sum + order.total_amount, 0) || 0;
       const totalOrders = orders?.length || 0;
+      const totalProducts = products?.length || 0;
 
       // Calculate profit (assuming 30% profit margin on sales)
       const totalProfit = totalSales * 0.3;
@@ -152,6 +154,7 @@ export default function Admin() {
         totalSales: Math.round(totalSales * 100) / 100,
         totalProfit: Math.round(totalProfit * 100) / 100,
         totalOrders,
+        totalProducts,
         salesData,
         profitData,
       });
@@ -170,7 +173,17 @@ export default function Admin() {
     try {
       const { data: orders, error } = await supabase
         .from('orders')
-        .select('*')
+        .select(`
+          *,
+          order_items (
+            *,
+            products (
+              name,
+              image_url,
+              images
+            )
+          )
+        `)
         .order('created_at', { ascending: false });
 
       if (error) throw error;
@@ -553,6 +566,7 @@ export default function Admin() {
                       <TableRow>
                         <TableHead>Order ID</TableHead>
                         <TableHead>Customer</TableHead>
+                        <TableHead>Products</TableHead>
                         <TableHead>Total</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead>Date</TableHead>
@@ -562,7 +576,27 @@ export default function Admin() {
                       {ordersData.slice(0, 10).map((order: any) => (
                         <TableRow key={order.id}>
                           <TableCell className="font-mono text-sm">#{order.id.slice(-8)}</TableCell>
-                          <TableCell>{order.customer_name || 'N/A'}</TableCell>
+                          <TableCell>{order.profiles?.full_name || order.profiles?.email || 'N/A'}</TableCell>
+                          <TableCell>
+                            <div className="space-y-1">
+                              {order.order_items?.slice(0, 2).map((item: any, index: number) => (
+                                <div key={index} className="flex items-center gap-2 text-xs">
+                                  <img
+                                    src={item.products?.image_url || item.products?.images?.[0] || '/placeholder.png'}
+                                    alt={item.products?.name || 'Product'}
+                                    className="w-6 h-6 object-cover rounded"
+                                  />
+                                  <span className="truncate max-w-24">{item.products?.name || 'Product'}</span>
+                                  <span className="text-muted-foreground">x{item.quantity}</span>
+                                </div>
+                              ))}
+                              {order.order_items?.length > 2 && (
+                                <span className="text-xs text-muted-foreground">
+                                  +{order.order_items.length - 2} more
+                                </span>
+                              )}
+                            </div>
+                          </TableCell>
                           <TableCell>${order.total_amount?.toFixed(2)}</TableCell>
                           <TableCell>
                             <span className={`px-2 py-1 rounded-full text-xs ${

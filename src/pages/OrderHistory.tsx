@@ -52,10 +52,12 @@ export default function OrderHistory() {
             *,
             products (
               name,
-              image_url
+              image_url,
+              images
             )
           )
         `)
+        .eq('user_id', user.id)
         .order('created_at', { ascending: false });
 
       if (error) throw error;
@@ -143,9 +145,9 @@ export default function OrderHistory() {
                     {order.order_items.map((item) => (
                       <div key={item.id} className="flex gap-4">
                         <div className="w-16 h-16 bg-muted rounded-md overflow-hidden flex-shrink-0">
-                          {item.products?.image_url && (
+                          {(item.products?.image_url || item.products?.images?.[0]) && (
                             <img
-                              src={item.products.image_url}
+                              src={item.products.image_url || item.products.images[0]}
                               alt={item.products.name}
                               className="w-full h-full object-cover"
                             />

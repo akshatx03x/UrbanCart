@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { CartItem, createStorefrontCheckout } from '@/lib/shopify';
+import { CartItem } from '@/lib/shopify';
 
 interface CartStore {
   items: CartItem[];
@@ -77,18 +77,8 @@ export const useCartStore = create<CartStore>()(
       setLoading: (isLoading) => set({ isLoading }),
 
       createCheckout: async () => {
-        const { items, setLoading, setCheckoutUrl } = get();
-        if (items.length === 0) return;
-
-        setLoading(true);
-        try {
-          const checkoutUrl = await createStorefrontCheckout(items);
-          setCheckoutUrl(checkoutUrl);
-        } catch (error) {
-          console.error('Failed to create checkout:', error);
-        } finally {
-          setLoading(false);
-        }
+        // Navigate to checkout page instead of creating Shopify checkout
+        window.location.href = '/checkout';
       },
 
       applyCoupon: (code: string) => {
