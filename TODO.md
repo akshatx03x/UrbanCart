@@ -1,0 +1,1 @@
+- [x] Fix JSX structure in Hero.tsx by adding missing closing tags for the empty div and overlay div
