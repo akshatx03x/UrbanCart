@@ -1,6 +1,10 @@
-- [x] Fix JSX structure in Hero.tsx by adding missing closing tags for the empty div and overlay div
+# TODO: Modify Contact Component for Manual Message Sending
 
-# TODO: Make Navbar Fixed on Homepage
-
-- [ ] Update Navbar component to use fixed positioning instead of sticky
-- [ ] Add top padding to Home page content to prevent overlap with fixed navbar
+## Steps to Complete:
+- [x] Remove automatic EmailJS sending from form submission
+- [x] Add state to track if message is typed and show options
+- [x] Add buttons for Outlook and Gmail options
+- [x] Implement mailto link for Outlook
+- [x] Implement Gmail compose link
+- [x] Update form behavior to show options after message input
+- [x] Test the changes
