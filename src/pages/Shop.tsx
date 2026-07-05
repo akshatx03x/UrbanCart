@@ -149,14 +149,14 @@ export default function Shop() {
   const displayProducts = filteredProducts.length > 0 ? filteredProducts : products;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0c0c0c] text-white">
       <Navbar />
       
       <div className="container mx-auto px-4 py-20">
         <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 className="text-4xl font-bold mb-2 animate-fade-in">Shop All Products</h1>
-            <p className="text-muted-foreground">Browse our complete collection</p>
+            <h1 className="text-4xl font-bold mb-2 animate-fade-in text-white">Shop All Products</h1>
+            <p className="text-slate-400">Browse our complete collection</p>
           </div>
           
           <div className="flex items-center gap-3 flex-wrap">
@@ -164,92 +164,96 @@ export default function Shop() {
               <Button
                 variant={filterCategory === "all" ? "default" : "outline"}
                 onClick={() => setFilterCategory("all")}
+                className={filterCategory === "all" ? "bg-white text-black hover:bg-slate-200 rounded-none px-4" : "border-white/20 text-white hover:bg-white/5 rounded-none px-4"}
               >
                 All
               </Button>
               <Button
                 variant={filterCategory === "Mobile" ? "default" : "outline"}
                 onClick={() => setFilterCategory("Mobile")}
+                className={filterCategory === "Mobile" ? "bg-white text-black hover:bg-slate-200 rounded-none px-4" : "border-white/20 text-white hover:bg-white/5 rounded-none px-4"}
               >
                 Mobile
               </Button>
               <Button
                 variant={filterCategory === "Clothes" ? "default" : "outline"}
                 onClick={() => setFilterCategory("Clothes")}
+                className={filterCategory === "Clothes" ? "bg-white text-black hover:bg-slate-200 rounded-none px-4" : "border-white/20 text-white hover:bg-white/5 rounded-none px-4"}
               >
                 Clothes
               </Button>
               <Button
                 variant={filterCategory === "Grocery" ? "default" : "outline"}
                 onClick={() => setFilterCategory("Grocery")}
+                className={filterCategory === "Grocery" ? "bg-white text-black hover:bg-slate-200 rounded-none px-4" : "border-white/20 text-white hover:bg-white/5 rounded-none px-4"}
               >
                 Grocery
               </Button>
             </div>
 
             <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[180px] bg-transparent border-white/20 text-white rounded-none">
                 <SlidersHorizontal className="h-4 w-4 mr-2" />
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="featured">Featured</SelectItem>
-                <SelectItem value="price-low">Price: Low to High</SelectItem>
-                <SelectItem value="price-high">Price: High to Low</SelectItem>
-                <SelectItem value="name">Name: A to Z</SelectItem>
+              <SelectContent className="bg-[#0c0c0c] border-white/10 text-white rounded-none">
+                <SelectItem value="featured" className="focus:bg-white/5 focus:text-white">Featured</SelectItem>
+                <SelectItem value="price-low" className="focus:bg-white/5 focus:text-white">Price: Low to High</SelectItem>
+                <SelectItem value="price-high" className="focus:bg-white/5 focus:text-white">Price: High to Low</SelectItem>
+                <SelectItem value="name" className="focus:bg-white/5 focus:text-white">Name: A to Z</SelectItem>
               </SelectContent>
             </Select>
 
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline">
+                <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 rounded-none">
                   <Filter className="h-4 w-4 mr-2" />
                   Filters
                 </Button>
               </SheetTrigger>
-              <SheetContent>
+              <SheetContent className="bg-[#0c0c0c] border-l border-white/10 text-white">
                 <SheetHeader>
-                  <SheetTitle>Filters</SheetTitle>
-                  <SheetDescription>
+                  <SheetTitle className="text-white">Filters</SheetTitle>
+                  <SheetDescription className="text-slate-400">
                     Refine your product search
                   </SheetDescription>
                 </SheetHeader>
                 
                 <div className="mt-6 space-y-6">
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Category</label>
+                    <label className="text-sm font-medium mb-2 block text-white">Category</label>
                     <Select value={filterCategory} onValueChange={setFilterCategory}>
-                      <SelectTrigger>
+                      <SelectTrigger className="bg-transparent border-white/20 text-white rounded-none">
                         <SelectValue placeholder="All Categories" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All Categories</SelectItem>
+                      <SelectContent className="bg-[#0c0c0c] border-white/10 text-white rounded-none">
+                        <SelectItem value="all" className="focus:bg-white/5 focus:text-white">All Categories</SelectItem>
                         {categories.map(cat => (
-                          <SelectItem key={cat} value={cat || ""}>{cat}</SelectItem>
+                          <SelectItem key={cat} value={cat || ""} className="focus:bg-white/5 focus:text-white">{cat}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Price Range</label>
+                    <label className="text-sm font-medium mb-2 block text-white">Price Range</label>
                     <Select value={priceRange} onValueChange={setPriceRange}>
-                      <SelectTrigger>
+                      <SelectTrigger className="bg-transparent border-white/20 text-white rounded-none">
                         <SelectValue placeholder="All Prices" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All Prices</SelectItem>
-                        <SelectItem value="under-50">Under $50</SelectItem>
-                        <SelectItem value="50-100">$50 - $100</SelectItem>
-                        <SelectItem value="100-500">$100 - $500</SelectItem>
-                        <SelectItem value="over-500">Over $500</SelectItem>
+                      <SelectContent className="bg-[#0c0c0c] border-white/10 text-white rounded-none">
+                        <SelectItem value="all" className="focus:bg-white/5 focus:text-white">All Prices</SelectItem>
+                        <SelectItem value="under-50" className="focus:bg-white/5 focus:text-white">Under $50</SelectItem>
+                        <SelectItem value="50-100" className="focus:bg-white/5 focus:text-white">$50 - $100</SelectItem>
+                        <SelectItem value="100-500" className="focus:bg-white/5 focus:text-white">$100 - $500</SelectItem>
+                        <SelectItem value="over-500" className="focus:bg-white/5 focus:text-white">Over $500</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <Button 
                     variant="outline" 
-                    className="w-full"
+                    className="w-full border-white/20 text-white hover:bg-white/5 rounded-none"
                     onClick={() => {
                       setFilterCategory("all");
                       setPriceRange("all");
@@ -267,23 +271,26 @@ export default function Shop() {
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {Array.from({ length: 12 }).map((_, i) => (
-              <Card key={i} className="animate-pulse">
-                <Skeleton className="h-64 w-full" />
+              <Card key={i} className="bg-transparent border border-white/10 rounded-none">
+                <Skeleton className="h-80 w-full bg-white/5 rounded-none" />
                 <CardContent className="p-4">
-                  <Skeleton className="h-4 w-3/4 mb-2" />
-                  <Skeleton className="h-4 w-1/2" />
+                  <Skeleton className="h-4 w-3/4 mb-2 bg-white/5" />
+                  <Skeleton className="h-4 w-1/2 bg-white/5" />
                 </CardContent>
               </Card>
             ))}
           </div>
         ) : displayProducts.length === 0 ? (
-          <div className="text-center py-12">
-            <ShoppingCart className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground text-lg mb-4">No products found</p>
-            <Button onClick={() => {
-              setFilterCategory("all");
-              setPriceRange("all");
-            }}>
+          <div className="text-center py-20 border border-white/10">
+            <ShoppingCart className="h-16 w-16 text-slate-600 mx-auto mb-4" />
+            <p className="text-slate-400 text-xl mb-4">No products found</p>
+            <Button 
+              className="bg-white text-black hover:bg-slate-200 rounded-none"
+              onClick={() => {
+                setFilterCategory("all");
+                setPriceRange("all");
+              }}
+            >
               Clear Filters
             </Button>
           </div>
@@ -292,21 +299,21 @@ export default function Shop() {
             {displayProducts.map((product, index) => (
               <Card 
                 key={product.node.id} 
-                className="group overflow-hidden hover:shadow-xl transition-all duration-300 animate-fade-in"
+                className="group bg-transparent border border-white/10 hover:border-white/30 rounded-none transition-colors duration-300 animate-fade-in"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="relative">
                   <Link to={`/product/${product.node.handle}`}>
-                    <div className="aspect-square overflow-hidden bg-muted">
+                    <div className="aspect-square overflow-hidden bg-white/5 relative">
                       {product.node.images.edges[0]?.node ? (
                         <img
                           src={product.node.images.edges[0].node.url}
                           alt={product.node.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
-                          <ShoppingCart className="h-16 w-16 text-muted-foreground" />
+                          <ShoppingCart className="h-16 w-16 text-slate-600" />
                         </div>
                       )}
                     </div>
@@ -314,33 +321,33 @@ export default function Shop() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="absolute top-2 right-2 bg-background/80 backdrop-blur-sm hover:bg-background transition-all hover:scale-110"
+                    className="absolute top-2 right-2 bg-[#0c0c0c]/85 backdrop-blur-sm hover:bg-white/10 text-white rounded-none border border-white/10 h-8 w-8 transition-transform"
                     onClick={() => handleToggleWishlist(product)}
                   >
                     <Heart 
-                      className={`h-5 w-5 ${isInWishlist(product.node.id) ? 'fill-red-500 text-red-500' : ''}`} 
+                      className={`h-4.5 w-4.5 ${isInWishlist(product.node.id) ? 'fill-red-500 text-red-500' : ''}`} 
                     />
                   </Button>
                   {product.node.productType && (
-                    <Badge className="absolute top-2 left-2 bg-primary/90 backdrop-blur-sm">
+                    <Badge className="absolute top-2 left-2 bg-transparent border border-white/20 text-slate-300 px-2 py-0.5 text-[10px] uppercase tracking-wider rounded-none backdrop-blur-sm">
                       {product.node.productType}
                     </Badge>
                   )}
                 </div>
-                <CardContent className="p-4">
+                <CardContent className="p-6">
                   <Link to={`/product/${product.node.handle}`}>
-                    <h3 className="font-semibold mb-2 line-clamp-1 hover:text-primary transition-colors">
+                    <h3 className="font-semibold text-lg mb-3 line-clamp-1 text-white group-hover:text-slate-300 transition-colors">
                       {product.node.title}
                     </h3>
                   </Link>
-                  <p className="text-2xl font-bold text-primary">
+                  <p className="text-xl font-bold text-white">
                     {product.node.priceRange.minVariantPrice.currencyCode}{" "}
                     {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}
                   </p>
                 </CardContent>
-                <CardFooter className="p-4 pt-0">
+                <CardFooter className="p-6 pt-0">
                   <Button 
-                    className="w-full group-hover:scale-105 transition-transform" 
+                    className="w-full bg-white text-black hover:bg-slate-200 rounded-none" 
                     onClick={() => handleAddToCart(product)}
                   >
                     <ShoppingCart className="mr-2 h-4 w-4" />

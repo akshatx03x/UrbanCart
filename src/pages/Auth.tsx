@@ -59,29 +59,29 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-accent/10 p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-[#0c0c0c] text-white p-4">
+      <Card className="w-full max-w-md bg-transparent border border-white/10 rounded-none">
         <CardHeader className="space-y-1 flex flex-col items-center">
-          <div className="flex items-center gap-2 text-primary mb-2">
+          <div className="flex items-center gap-2 text-white mb-2">
             <ShoppingBag className="h-8 w-8" />
-            <span className="text-2xl font-bold">ShopHub</span>
+            <span className="text-2xl font-bold">UrbanCart</span>
           </div>
-          <CardTitle className="text-2xl">Welcome</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl text-white">Welcome</CardTitle>
+          <CardDescription className="text-slate-400">
             Sign in to your account or create a new one
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">Sign In</TabsTrigger>
-              <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-white/5 p-1 border border-white/10 rounded-none h-auto mb-6">
+              <TabsTrigger value="signin" className="rounded-none text-slate-400 data-[state=active]:bg-white data-[state=active]:text-black py-2">Sign In</TabsTrigger>
+              <TabsTrigger value="signup" className="rounded-none text-slate-400 data-[state=active]:bg-white data-[state=active]:text-black py-2">Sign Up</TabsTrigger>
             </TabsList>
             
             <TabsContent value="signin">
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signin-email">Email</Label>
+                  <Label htmlFor="signin-email" className="text-white">Email</Label>
                   <Input
                     id="signin-email"
                     type="email"
@@ -89,19 +89,21 @@ export default function Auth() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className="bg-transparent border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signin-password">Password</Label>
+                  <Label htmlFor="signin-password" className="text-white">Password</Label>
                   <Input
                     id="signin-password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className="bg-transparent border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0"
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" className="w-full bg-white text-black hover:bg-slate-200 rounded-none py-6 font-medium disabled:bg-white/10 disabled:text-white/40 mt-2" disabled={loading}>
                   {loading ? "Signing in..." : "Sign In"}
                 </Button>
               </form>
@@ -110,7 +112,7 @@ export default function Auth() {
             <TabsContent value="signup">
               <form onSubmit={handleSignUp} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
+                  <Label htmlFor="signup-email" className="text-white">Email</Label>
                   <Input
                     id="signup-email"
                     type="email"
@@ -118,10 +120,11 @@ export default function Auth() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className="bg-transparent border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
+                  <Label htmlFor="signup-password" className="text-white">Password</Label>
                   <Input
                     id="signup-password"
                     type="password"
@@ -129,9 +132,10 @@ export default function Auth() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     minLength={6}
+                    className="bg-transparent border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0"
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" className="w-full bg-white text-black hover:bg-slate-200 rounded-none py-6 font-medium disabled:bg-white/10 disabled:text-white/40 mt-2" disabled={loading}>
                   {loading ? "Creating account..." : "Sign Up"}
                 </Button>
               </form>

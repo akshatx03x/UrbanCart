@@ -364,13 +364,16 @@ export default function Checkout() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-[#0c0c0c] text-white">
         <Navbar />
-        <div className="container mx-auto px-4 py-16 text-center">
-          <ShoppingCart className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-          <h1 className="text-2xl font-bold mb-4">Your cart is empty</h1>
-          <p className="text-muted-foreground mb-8">Add some items to your cart before checking out</p>
-          <Button onClick={() => navigate('/shop')}>
+        <div className="container mx-auto px-4 py-20 text-center">
+          <ShoppingCart className="h-16 w-16 text-slate-600 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold mb-4 text-white">Your cart is empty</h1>
+          <p className="text-slate-400 mb-8">Add some items to your cart before checking out</p>
+          <Button 
+            className="bg-white text-black hover:bg-slate-200 rounded-none px-6"
+            onClick={() => navigate('/shop')}
+          >
             Continue Shopping
           </Button>
         </div>
@@ -379,29 +382,29 @@ export default function Checkout() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0c0c0c] text-white">
       <Navbar />
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-20">
         <div className="mb-8">
           <Button
             variant="ghost"
             onClick={() => navigate('/shop')}
-            className="mb-4"
+            className="mb-4 text-slate-300 hover:text-white hover:bg-white/5 rounded-none"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Shop
           </Button>
           <h1 className="text-4xl font-bold mb-2">Checkout</h1>
-          <p className="text-muted-foreground">Complete your purchase securely</p>
+          <p className="text-slate-400">Complete your purchase securely</p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {/* Customer Details */}
           <div className="space-y-6">
-            <Card>
+            <Card className="bg-transparent border border-white/10 rounded-none">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-white">
                   <User className="h-5 w-5" />
                   Customer Details
                 </CardTitle>
@@ -409,17 +412,18 @@ export default function Checkout() {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="full_name">Full Name *</Label>
+                    <Label htmlFor="full_name" className="text-white">Full Name *</Label>
                     <Input
                       id="full_name"
                       placeholder="Enter your full name"
                       value={customerDetails.full_name}
                       onChange={(e) => setCustomerDetails(prev => ({ ...prev, full_name: e.target.value }))}
                       required
+                      className="bg-transparent border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email *</Label>
+                    <Label htmlFor="email" className="text-white">Email *</Label>
                     <Input
                       id="email"
                       type="email"
@@ -427,12 +431,13 @@ export default function Checkout() {
                       value={customerDetails.email}
                       onChange={(e) => setCustomerDetails(prev => ({ ...prev, email: e.target.value }))}
                       required
+                      className="bg-transparent border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="phone" className="flex items-center gap-2">
+                  <Label htmlFor="phone" className="flex items-center gap-2 text-white">
                     <Phone className="h-4 w-4" />
                     Phone Number *
                   </Label>
@@ -442,11 +447,12 @@ export default function Checkout() {
                     value={customerDetails.phone}
                     onChange={(e) => setCustomerDetails(prev => ({ ...prev, phone: e.target.value }))}
                     required
+                    className="bg-transparent border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="address" className="flex items-center gap-2">
+                  <Label htmlFor="address" className="flex items-center gap-2 text-white">
                     <MapPin className="h-4 w-4" />
                     Address *
                   </Label>
@@ -456,38 +462,42 @@ export default function Checkout() {
                     value={customerDetails.address}
                     onChange={(e) => setCustomerDetails(prev => ({ ...prev, address: e.target.value }))}
                     required
+                    className="bg-transparent border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0min-h-[80px]"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="city">City *</Label>
+                    <Label htmlFor="city" className="text-white">City *</Label>
                     <Input
                       id="city"
                       placeholder="Enter your city"
                       value={customerDetails.city}
                       onChange={(e) => setCustomerDetails(prev => ({ ...prev, city: e.target.value }))}
                       required
+                      className="bg-transparent border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="postal_code">Postal Code *</Label>
+                    <Label htmlFor="postal_code" className="text-white">Postal Code *</Label>
                     <Input
                       id="postal_code"
                       placeholder="Enter postal code"
                       value={customerDetails.postal_code}
                       onChange={(e) => setCustomerDetails(prev => ({ ...prev, postal_code: e.target.value }))}
                       required
+                      className="bg-transparent border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="country">Country</Label>
+                  <Label htmlFor="country" className="text-white">Country</Label>
                   <Input
                     id="country"
                     value={customerDetails.country}
                     onChange={(e) => setCustomerDetails(prev => ({ ...prev, country: e.target.value }))}
+                    className="bg-transparent border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0"
                   />
                 </div>
               </CardContent>
@@ -496,15 +506,15 @@ export default function Checkout() {
 
           {/* Order Summary */}
           <div className="space-y-6">
-            <Card>
+            <Card className="bg-transparent border border-white/10 rounded-none">
               <CardHeader>
-                <CardTitle>Order Summary</CardTitle>
+                <CardTitle className="text-white">Order Summary</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {items.map((item) => (
                     <div key={item.variantId} className="flex gap-4">
-                      <div className="w-16 h-16 bg-muted rounded-md overflow-hidden flex-shrink-0">
+                      <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-none overflow-hidden flex-shrink-0">
                         {item.product.node.images?.edges?.[0]?.node && (
                           <img
                             src={item.product.node.images.edges[0].node.url}
@@ -514,13 +524,13 @@ export default function Checkout() {
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-medium truncate">{item.product.node.title}</h4>
-                        <p className="text-sm text-muted-foreground">
+                        <h4 className="font-medium truncate text-white">{item.product.node.title}</h4>
+                        <p className="text-sm text-slate-400">
                           {item.selectedOptions.map(option => option.value).join(' • ')}
                         </p>
                         <div className="flex justify-between items-center mt-2">
-                          <span className="text-sm">Qty: {item.quantity}</span>
-                          <span className="font-semibold">
+                          <span className="text-sm text-slate-400">Qty: {item.quantity}</span>
+                          <span className="font-semibold text-white">
                             ${(parseFloat(item.price.amount) * item.quantity).toFixed(2)}
                           </span>
                         </div>
@@ -528,18 +538,18 @@ export default function Checkout() {
                     </div>
                   ))}
 
-                  <div className="border-t pt-4 space-y-2">
-                    <div className="flex justify-between">
-                      <span>Subtotal</span>
-                      <span>${subtotal.toFixed(2)}</span>
+                  <div className="border-t border-white/10 pt-4 space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-400">Subtotal</span>
+                      <span className="text-white">${subtotal.toFixed(2)}</span>
                     </div>
                     {discount > 0 && (
-                      <div className="flex justify-between text-green-600">
+                      <div className="flex justify-between text-green-400 text-sm">
                         <span>Discount ({discount}%)</span>
                         <span>-${discountAmount.toFixed(2)}</span>
                       </div>
                     )}
-                    <div className="flex justify-between text-lg font-semibold border-t pt-2">
+                    <div className="flex justify-between text-lg font-semibold border-t border-white/10 pt-2 text-white">
                       <span>Total</span>
                       <span>${total.toFixed(2)}</span>
                     </div>
@@ -551,26 +561,26 @@ export default function Checkout() {
 
           {/* Payment Methods */}
           <div className="space-y-6">
-            <Card>
+            <Card className="bg-transparent border border-white/10 rounded-none">
               <CardHeader>
-                <CardTitle>Payment Method</CardTitle>
+                <CardTitle className="text-white">Payment Method</CardTitle>
               </CardHeader>
               <CardContent>
                 <Tabs defaultValue="card" className="w-full">
-                  <TabsList className="grid w-full grid-cols-4">
-                    <TabsTrigger value="card" className="flex items-center gap-2">
+                  <TabsList className="grid w-full grid-cols-4 bg-white/5 p-1 border border-white/10 rounded-none h-auto">
+                    <TabsTrigger value="card" className="flex items-center gap-2 rounded-none text-slate-400 data-[state=active]:bg-white data-[state=active]:text-black py-2">
                       <CreditCard className="h-4 w-4" />
                       <span className="hidden sm:inline">Card</span>
                     </TabsTrigger>
-                    <TabsTrigger value="cod" className="flex items-center gap-2">
+                    <TabsTrigger value="cod" className="flex items-center gap-2 rounded-none text-slate-400 data-[state=active]:bg-white data-[state=active]:text-black py-2">
                       <Truck className="h-4 w-4" />
                       <span className="hidden sm:inline">COD</span>
                     </TabsTrigger>
-                    <TabsTrigger value="netbanking" className="flex items-center gap-2">
+                    <TabsTrigger value="netbanking" className="flex items-center gap-2 rounded-none text-slate-400 data-[state=active]:bg-white data-[state=active]:text-black py-2">
                       <Building2 className="h-4 w-4" />
                       <span className="hidden sm:inline">Net Banking</span>
                     </TabsTrigger>
-                    <TabsTrigger value="giftcard" className="flex items-center gap-2">
+                    <TabsTrigger value="giftcard" className="flex items-center gap-2 rounded-none text-slate-400 data-[state=active]:bg-white data-[state=active]:text-black py-2">
                       <Gift className="h-4 w-4" />
                       <span className="hidden sm:inline">Gift Card</span>
                     </TabsTrigger>
@@ -585,19 +595,19 @@ export default function Checkout() {
 
                   <TabsContent value="cod" className="mt-6">
                     <div className="space-y-4">
-                      <div className="p-4 border rounded-lg bg-muted/50">
-                        <h3 className="font-semibold mb-2">Cash on Delivery</h3>
-                        <p className="text-sm text-muted-foreground mb-4">
+                      <div className="p-4 border border-white/10 rounded-none bg-white/5">
+                        <h3 className="font-semibold mb-2 text-white">Cash on Delivery</h3>
+                        <p className="text-sm text-slate-400 mb-4">
                           Pay with cash when your order is delivered to your doorstep. No online payment required.
                         </p>
-                        <div className="space-y-2 text-sm">
+                        <div className="space-y-2 text-sm text-slate-400">
                           <p>• Pay only when you receive your order</p>
                           <p>• No extra delivery charges</p>
                           <p>• Available for orders above $10</p>
                         </div>
                       </div>
                       <Button
-                        className="w-full"
+                        className="w-full bg-white text-black hover:bg-slate-200 rounded-none disabled:bg-white/10 disabled:text-white/40"
                         onClick={handleCODPayment}
                         disabled={total < 10}
                       >
@@ -608,12 +618,12 @@ export default function Checkout() {
 
                   <TabsContent value="netbanking" className="mt-6">
                     <div className="space-y-4">
-                      <div className="p-4 border rounded-lg bg-muted/50">
-                        <h3 className="font-semibold mb-2">Net Banking</h3>
-                        <p className="text-sm text-muted-foreground mb-4">
+                      <div className="p-4 border border-white/10 rounded-none bg-white/5">
+                        <h3 className="font-semibold mb-2 text-white">Net Banking</h3>
+                        <p className="text-sm text-slate-400 mb-4">
                           Pay securely through your bank account. Fast and secure online banking transfer.
                         </p>
-                        <div className="space-y-2 text-sm">
+                        <div className="space-y-2 text-sm text-slate-400">
                           <p>• Direct bank transfer</p>
                           <p>• No additional charges</p>
                           <p>• Instant confirmation</p>
@@ -622,13 +632,13 @@ export default function Checkout() {
                       <div className="space-y-3">
                         <div className="grid grid-cols-2 gap-2">
                           {['HDFC Bank', 'ICICI Bank', 'SBI', 'Axis Bank', 'Kotak Mahindra', 'Other Banks'].map((bank) => (
-                            <Button key={bank} variant="outline" size="sm" className="text-xs">
+                            <Button key={bank} variant="outline" size="sm" className="text-xs border-white/20 text-white hover:bg-white/5 rounded-none">
                               {bank}
                             </Button>
                           ))}
                         </div>
                       </div>
-                      <Button className="w-full" onClick={handleNetBankingPayment}>
+                      <Button className="w-full bg-white text-black hover:bg-slate-200 rounded-none" onClick={handleNetBankingPayment}>
                         Continue with Net Banking
                       </Button>
                     </div>
@@ -636,12 +646,12 @@ export default function Checkout() {
 
                   <TabsContent value="giftcard" className="mt-6">
                     <div className="space-y-4">
-                      <div className="p-4 border rounded-lg bg-muted/50">
-                        <h3 className="font-semibold mb-2">Gift Card</h3>
-                        <p className="text-sm text-muted-foreground mb-4">
+                      <div className="p-4 border border-white/10 rounded-none bg-white/5">
+                        <h3 className="font-semibold mb-2 text-white">Gift Card</h3>
+                        <p className="text-sm text-slate-400 mb-4">
                           Redeem your gift card or use store credit for this purchase.
                         </p>
-                        <div className="space-y-2 text-sm">
+                        <div className="space-y-2 text-sm text-slate-400">
                           <p>• Instant redemption</p>
                           <p>• No expiration on unused balance</p>
                           <p>• Can be combined with other payment methods</p>
@@ -649,31 +659,31 @@ export default function Checkout() {
                       </div>
                       <div className="space-y-3">
                         <div className="space-y-2">
-                          <label className="text-sm font-medium">Gift Card Code</label>
+                          <label className="text-sm font-medium text-white">Gift Card Code</label>
                           <input
                             type="text"
                             placeholder="Enter gift card code"
-                            className="w-full px-3 py-2 border rounded-md"
+                            className="w-full px-3 py-2 bg-transparent border border-white/20 text-white rounded-none focus-visible:ring-1 focus-visible:ring-white/40 focus-visible:ring-offset-0 outline-none"
                             value={giftCardCode}
                             onChange={(e) => setGiftCardCode(e.target.value.toUpperCase())}
                           />
                         </div>
                         <Button
                           variant="outline"
-                          className="w-full"
+                          className="w-full border-white/20 text-white hover:bg-white/5 rounded-none"
                           onClick={handleApplyGiftCard}
                           disabled={!giftCardCode}
                         >
                           Apply Gift Card
                         </Button>
                         {appliedGiftCard && (
-                          <div className="p-2 bg-green-50 border border-green-200 rounded text-sm text-green-700">
+                          <div className="p-2 bg-green-500/10 border border-green-500/20 rounded-none text-sm text-green-400">
                             Gift card applied: ${appliedGiftCard.amount.toFixed(2)} discount
                           </div>
                         )}
                       </div>
                       <Button
-                        className="w-full"
+                        className="w-full bg-white text-black hover:bg-slate-200 rounded-none disabled:bg-white/10 disabled:text-white/40"
                         onClick={handleGiftCardPayment}
                         disabled={!appliedGiftCard || appliedGiftCard.amount < total}
                       >

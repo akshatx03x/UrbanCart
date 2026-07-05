@@ -30,29 +30,29 @@ export default function Wishlist() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0c0c0c] text-white">
       <Navbar />
       
       <div className="container mx-auto px-4 py-20">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">My Wishlist</h1>
-          <p className="text-muted-foreground">Items you've saved for later</p>
+          <p className="text-slate-400">Items you've saved for later</p>
         </div>
 
         {items.length === 0 ? (
-          <div className="text-center py-12">
-            <Heart className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground text-lg mb-4">Your wishlist is empty</p>
-            <Button asChild>
+          <div className="text-center py-20 border border-white/10">
+            <Heart className="h-16 w-16 text-slate-600 mx-auto mb-4" />
+            <p className="text-slate-400 text-xl mb-4">Your wishlist is empty</p>
+            <Button className="bg-white text-black hover:bg-slate-200 rounded-none px-6" asChild>
               <Link to="/shop">Start Shopping</Link>
             </Button>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {items.map((product) => (
-              <Card key={product.node.id} className="group overflow-hidden hover:shadow-lg transition-all animate-fade-in">
+              <Card key={product.node.id} className="group bg-transparent border border-white/10 hover:border-white/30 rounded-none transition-colors duration-300 animate-fade-in">
                 <Link to={`/product/${product.node.handle}`}>
-                  <div className="aspect-square overflow-hidden bg-muted">
+                  <div className="aspect-square overflow-hidden bg-white/5 relative">
                     {product.node.images.edges[0]?.node ? (
                       <img
                         src={product.node.images.edges[0].node.url}
@@ -61,25 +61,25 @@ export default function Wishlist() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <ShoppingCart className="h-16 w-16 text-muted-foreground" />
+                        <ShoppingCart className="h-16 w-16 text-slate-600" />
                       </div>
                     )}
                   </div>
                 </Link>
-                <CardContent className="p-4">
+                <CardContent className="p-6">
                   <Link to={`/product/${product.node.handle}`}>
-                    <h3 className="font-semibold mb-2 line-clamp-1 hover:text-primary transition-colors">
+                    <h3 className="font-semibold text-lg mb-3 line-clamp-1 text-white group-hover:text-slate-300 transition-colors">
                       {product.node.title}
                     </h3>
                   </Link>
-                  <p className="text-2xl font-bold text-primary">
+                  <p className="text-xl font-bold text-white">
                     {product.node.priceRange.minVariantPrice.currencyCode}{" "}
                     {parseFloat(product.node.priceRange.minVariantPrice.amount).toFixed(2)}
                   </p>
                 </CardContent>
-                <CardFooter className="p-4 pt-0 flex gap-2">
+                <CardFooter className="p-6 pt-0 flex gap-2">
                   <Button 
-                    className="flex-1" 
+                    className="flex-1 bg-white text-black hover:bg-slate-200 rounded-none" 
                     onClick={() => handleAddToCart(product)}
                   >
                     <ShoppingCart className="mr-2 h-4 w-4" />
@@ -87,6 +87,7 @@ export default function Wishlist() {
                   </Button>
                   <Button
                     variant="outline"
+                    className="border-white/20 text-white hover:bg-white/5 rounded-none"
                     size="icon"
                     onClick={() => {
                       removeItem(product.node.id);
