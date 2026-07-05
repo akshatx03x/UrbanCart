@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,7 @@ import {
 import { ShoppingCart, Minus, Plus, Trash2, CreditCard, Loader2, Tag, X } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 export const CartDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +35,16 @@ export const CartDrawer = () => {
   const subtotal = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
   const discountAmount = (subtotal * discount) / 100;
   const totalPrice = subtotal - discountAmount;
+
+  const [animateCart, setAnimateCart] = useState(false);
+
+  useEffect(() => {
+    if (totalItems > 0) {
+      setAnimateCart(true);
+      const timer = setTimeout(() => setAnimateCart(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [totalItems]);
 
   const handleApplyCoupon = () => {
     if (applyCoupon(couponInput)) {
@@ -64,7 +75,7 @@ export const CartDrawer = () => {
           <Button variant="outline" size="icon" className="relative border-white/20 text-white hover:bg-white/5 rounded-none">
             <ShoppingCart className="h-5 w-5" />
             {totalItems > 0 && (
-              <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs bg-white text-black">
+              <Badge className={cn("absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-[10px] bg-white text-black font-semibold border border-black/10 shadow-sm", animateCart && "animate-bounce-in")}>
                 {totalItems}
               </Badge>
             )}
